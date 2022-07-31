@@ -1,0 +1,49 @@
+{% extends 'scramapp/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <section class="vh-100" style="background-color: white;">
+      
+        <div class="container py-5 h-100">
+          
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+       
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5">
+      
+                  <h6 class="mb-3">SCRAM NOTES</h6>
+      
+                  <form action = "" method = "post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" class="btn btn-success" value=Post>
+                </form>
+                <br><br>
+                <div class="row">
+                  <div class="col-sm-6">
+                    {% for note in my_notes %}
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ note.title }}</h5>
+                        <p><small>{{ note.created_at }}</small></p>
+                        <p class="card-text">{{ note.content }}</p>
+                        <a href="{% url 'delete_plan' note.id %}" class="btn btn-primary">Delete</a>
+                      </div>
+                    </div>
+                    <br><br>
+                    {% endfor %}
+                  </div>
+                </div>
+      
+                </div>
+              </div>
+      
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+      {% endblock %}
